@@ -18,6 +18,7 @@ class WebAuthenticate
     {
         $token = $request->session()->get('token');
         if (!$token) {
+            
             return redirect()->route('login.page');
         }
 
@@ -34,7 +35,7 @@ class WebAuthenticate
         }else {
             return redirect()->route('login.page');
         }
-        
+
         return $next($request);
     }
 }

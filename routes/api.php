@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\API\PortofolioApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,4 +27,13 @@ Route::middleware('jwt.api')->group(function () {
         Route::post('logout', 'logout');
         Route::post('refresh', 'refresh');
     });
+    Route::controller(PortofolioApiController::class)->group(function () {
+        Route::get('portofolio', 'index');
+        Route::post('portofolio', 'create');
+        Route::put('portofolio/{id}', 'edit');
+        Route::delete('portofolio/{id}', 'delete');
+    });
 });
+
+
+
