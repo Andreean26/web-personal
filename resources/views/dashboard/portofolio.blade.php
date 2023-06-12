@@ -84,9 +84,7 @@
                     @foreach ($portofolio['portofolio'] as $item)
                     <tr>
                         <td class="text-center">
-
                             <p class="text-xs font-weight-bold mb-0 ">{{ $item['title']}}</p>
-
                         </td>
                         <td class="text-center">
                             <p class="text-xs font-weight-bold mb-0">{{ $item['description'] }}</p>
