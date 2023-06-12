@@ -142,7 +142,7 @@
                                                         </div>
                                                         <div class="text-center">
                                                             <button type="submit"
-                                                                class="btn btn-round bg-gradient-info btn-lg w-100 mt-4 mb-0">Submit</button>
+                                                                class="btn btn-round bg-gradient-info btn-lg w-100 mt-4 mb-0">Submit Edit</button>
                                                         </div>
                                                     </form>
                                                 </div>
@@ -178,7 +178,7 @@
                                                 </div>
                                             </div>
                                             <form action="{{ route('portofolio.delete', $item['id']) }}"
-                                                method="POST">
+                                                method="GET">
                                                 @csrf
                                                 <div class="modal-footer">
                                                     <button type="submit"

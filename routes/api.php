@@ -30,7 +30,7 @@ Route::middleware('jwt.api')->group(function () {
     Route::controller(PortofolioApiController::class)->group(function () {
         Route::get('portofolio', 'index');
         Route::post('portofolio', 'create');
-        Route::put('portofolio/{id}', 'edit');
+        Route::post('portofolio/{id}', 'edit');
         Route::delete('portofolio/{id}', 'delete');
     });
 });

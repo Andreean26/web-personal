@@ -31,7 +31,7 @@ Route::middleware('jwt.web')->group(function () {
     // portofolio
     Route::get('/portofolio', [PortofolioController::class, 'index'])->name('portofolio');
     Route::post('/portofolio', [PortofolioController::class, 'create'])->name('portofolio.create');
-    Route::put('/portofolio/{id}', [PortofolioController::class, 'edit'])->name('portofolio.edit');
-    Route::delete('/portofolio/{id}', [PortofolioController::class, 'delete'])->name('portofolio.delete');
+    Route::post('/portofolio/{id}', [PortofolioController::class, 'edit'])->name('portofolio.edit');
+    Route::get('/portofolio/{id}', [PortofolioController::class, 'delete'])->name('portofolio.delete');
 
 });

@@ -19,11 +19,11 @@ class PortofolioController extends Controller
 
     public function create(Request $request)
     {
-        $data = Http::withToken(session('token'))->post('http://localhost:3000/api/portofolio', [
+        $data = Http::withToken(session('token'))->attach('image', $request->image->path(), $request->image->getClientOriginalName())->post('http://localhost:3000/api/portofolio', [
             'title' => $request->title,
             'description' => $request->description,
-            'image' => $request->image,
         ]);
+
         $portofolio = json_decode($data->body(), true);
 
         return back()->with('success', 'Portofolio berhasil ditambahkan');
@@ -31,10 +31,14 @@ class PortofolioController extends Controller
 
     public function edit(Request $request, $id)
     {
-        $data = Http::withToken(session('token'))->put('http://localhost:3000/api/portofolio/'.$request->id, [
+        // $data = Http::withToken(session('token'))->put('http://localhost:3000/api/portofolio/'.$request->id, [
+        //     'title' => $request->title,
+        //     'description' => $request->description,
+        //     'image' => $request->image,
+        // ]);
+        $data = Http::withToken(session('token'))->attach('image', $request->image->path(), $request->image->getClientOriginalName())->post('http://localhost:3000/api/portofolio/'.$request->id, [
             'title' => $request->title,
             'description' => $request->description,
-            'image' => $request->image,
         ]);
         $portofolio = json_decode($data->body(), true);
 
