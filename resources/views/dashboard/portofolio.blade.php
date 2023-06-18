@@ -47,13 +47,16 @@
                                                     placeholder="Upload Image" aria-label="Upload Image"
                                                     aria-describedby="password-addon" name="image">
                                             </div>
-                                            {{-- <div class="form-group">
+
+                                            <div class="form-group">
                                                 <label for="exampleFormControlSelect1">Category</label>
                                                 <select class="form-control" id="exampleFormControlSelect1">
-                                                    <option>Mobile</option>
-                                                    <option>PC</option>
+                                                        @foreach ($category as $item)
+                                                        <option>
+                                                            {{ $item['name']}}</option>
+                                                        @endforeach
                                                 </select>
-                                            </div> --}}
+                                            </div>
                                             <div class="text-center">
                                                 <button type="submit"
                                                     class="btn btn-round bg-gradient-primary btn-lg w-100 mt-4 mb-0">Submit</button>
@@ -73,21 +76,25 @@
               <table class="table align-items-center mb-0">
                 <thead>
                   <tr>
-                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Title</th>
-                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Description</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Title</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Description</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">category</th>
                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Image</th>
                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action</th>
                     <th class="text-secondary opacity-7"></th>
                   </tr>
                 </thead>
                 <tbody>
-                    @foreach ($portofolio['portofolio'] as $item)
+                    @foreach ($portofolio as $item)
                     <tr>
                         <td class="text-center">
                             <p class="text-xs font-weight-bold mb-0 ">{{ $item['title']}}</p>
                         </td>
                         <td class="text-center">
                             <p class="text-xs font-weight-bold mb-0">{{ $item['description'] }}</p>
+                        </td>
+                        <td class="text-center">
+                            <p class="text-xs font-weight-bold mb-0">{{ $item['category_id'] }}</p>
                         </td>
                         <td class="text-center">
                             <img src="{{ asset('images/' . $item['image']) }}" alt="image" class="img-fluid rounded shadow" style="width: 100px">
@@ -199,38 +206,5 @@
         </div>
       </div>
     </div>
-
-    <footer class="footer pt-3  ">
-      <div class="container-fluid">
-        <div class="row align-items-center justify-content-lg-between">
-          <div class="col-lg-6 mb-lg-0 mb-4">
-            <div class="copyright text-center text-sm text-muted text-lg-start">
-              © <script>
-                document.write(new Date().getFullYear())
-              </script>,
-              made with <i class="fa fa-heart"></i> by
-              <a href="https://www.creative-tim.com" class="font-weight-bold" target="_blank">Creative Tim</a>
-              for a better web.
-            </div>
-          </div>
-          <div class="col-lg-6">
-            <ul class="nav nav-footer justify-content-center justify-content-lg-end">
-              <li class="nav-item">
-                <a href="https://www.creative-tim.com" class="nav-link text-muted" target="_blank">Creative Tim</a>
-              </li>
-              <li class="nav-item">
-                <a href="https://www.creative-tim.com/presentation" class="nav-link text-muted" target="_blank">About Us</a>
-              </li>
-              <li class="nav-item">
-                <a href="https://www.creative-tim.com/blog" class="nav-link text-muted" target="_blank">Blog</a>
-              </li>
-              <li class="nav-item">
-                <a href="https://www.creative-tim.com/license" class="nav-link pe-0 text-muted" target="_blank">License</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </footer>
   </div>
 @endsection

@@ -11,10 +11,14 @@ class PortofolioController extends Controller
     //
     public function index()
     {
+
         $data = Http::withToken(session('token'))->get('http://localhost:3000/api/portofolio');
         $portofolio = json_decode($data->body(), true);
+        
+        $datacategory = Http::withToken(session('token'))->get('http://localhost:3000/api/category');
+        $category = json_decode($datacategory->body(), true);
 
-        return view('dashboard.portofolio', ['portofolio' => $portofolio]);
+        return view('dashboard.portofolio', compact('portofolio', 'category'));
     }
 
     public function create(Request $request)
@@ -22,10 +26,11 @@ class PortofolioController extends Controller
         $data = Http::withToken(session('token'))->attach('image', $request->image->path(), $request->image->getClientOriginalName())->post('http://localhost:3000/api/portofolio', [
             'title' => $request->title,
             'description' => $request->description,
+            'category_id' => $request->category_id,
         ]);
 
         $portofolio = json_decode($data->body(), true);
-
+        dd($portofolio);
         return back()->with('success', 'Portofolio berhasil ditambahkan');
     }
 
@@ -36,9 +41,11 @@ class PortofolioController extends Controller
         //     'description' => $request->description,
         //     'image' => $request->image,
         // ]);
+
         $data = Http::withToken(session('token'))->attach('image', $request->image->path(), $request->image->getClientOriginalName())->post('http://localhost:3000/api/portofolio/'.$request->id, [
             'title' => $request->title,
             'description' => $request->description,
+            'category_id' => $request->category_id,
         ]);
         $portofolio = json_decode($data->body(), true);
 

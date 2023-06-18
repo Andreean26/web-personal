@@ -11,14 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('portofolios', function (Blueprint $table) {
+        Schema::create('category', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->string('image');
-            $table->string('description');
-            $table->foreignId('category_id')->constrained('category')
-            ->onUpdate('cascade')
-            ->onDelete('cascade');
+            $table->string('name');
             $table->timestamps();
         });
     }
@@ -28,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('portofolios');
+        Schema::dropIfExists('category');
     }
 };

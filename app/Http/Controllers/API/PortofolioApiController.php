@@ -11,9 +11,22 @@ class PortofolioApiController extends Controller
     //
     public function index()
     {
-        $portofolio = portofolio::all();
+        $portofolio = portofolio::with('category')->get();
+
+        $dataPortofolio = [];
+        foreach ($portofolio as $key => $value) {
+            $dataPortofolio[$key] = [
+                'id' => $value->id,
+                'title' => $value->title,
+                'image' => $value->image,
+                'description' => $value->description,
+                'category_name' => $value->category->name,
+                'category_id' => $value->category_id,
+            ];
+        }
+
         return response()->json([
-            'portofolio' => $portofolio,
+
 
         ]);
 
@@ -21,8 +34,9 @@ class PortofolioApiController extends Controller
 
     public function create(Request $request)
     {
-        
+
         $portofolio = portofolio::create($request->all());
+
         if ($request->hasFile('image')) {
             $request->file('image')->move('images/', $request->file('image')->getClientOriginalName());
             $portofolio->image = $request->file('image')->getClientOriginalName();
@@ -40,6 +54,7 @@ class PortofolioApiController extends Controller
         $portofolio = portofolio::find($request->id);
         $portofolio->title = $request->title;
         $portofolio->description = $request->description;
+        $portofolio->category_id = $request->category_id;
         if ($request->hasFile('image')) {
             $request->file('image')->move('images/', $request->file('image')->getClientOriginalName());
             $portofolio->image = $request->file('image')->getClientOriginalName();
